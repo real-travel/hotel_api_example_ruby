@@ -2,7 +2,8 @@ require 'ruby-debug'
 require 'xml'
 require 'ostruct'
 class PlacesController < ApplicationController
-  AFFILIATE_ID='f8ejKn3983H'
+  AFFILIATE_ID = 'f8ejKn3983H'
+  API_HOST = 'http://localhost:3001' # 'http://staging.realtravel.com'
 
   def index
     @places = ZipCode.all(:limit => 100, :conditions => 'latitude IS NOT NULL')
@@ -10,28 +11,34 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
-    document = http_client("http://localhost:3001/hotels.xml",{:latitude => @place.latitude, :longitude => @place.longitude})
-    hotels = document.find('//hotel')
-
-    @hotels = []
-    hotels.each do |hotel|
-      @hotels << OpenStruct.new(
-        :hotel_id => hotel.find('@id').first.value,
-        :photo => hotel.find('photo').first.content,
-        :name => hotel.find('name').first.content,
-        :address => hotel.find('address').first.content,
-        :rating => hotel.find('rating').first.content,
-        :star_rating => hotel.find('starrating').first.content,
-        :description => hotel.find('description').first.content,
-        :destination => hotel.find('destination').first.content
-      )
-    end
+    document = http_client("/hotels.xml",{:latitude => @place.latitude, :longitude => @place.longitude}.merge(catch_filters))
+    page = document.find('//hotels').first.attributes['page']
+    per_page = document.find('//hotels').first.attributes['per_page']
+    total = document.find('//hotels').first.attributes['total']
+    
+    @hotels = WillPaginate::Collection.create(page, per_page, total) do |pager|
+      hotel_list = []
+      document.find('//hotel').each do |hotel|
+        hotel_list << OpenStruct.new(
+          :hotel_id => hotel.find('@id').first.value,
+          :photo => hotel.find('photo').first.content,
+          :name => hotel.find('name').first.content,
+          :address => hotel.find('address').first.content,
+          :rating => hotel.find('rating').first.content,
+          :star_rating => hotel.find('starrating').first.content,
+          :description => hotel.find('description').first.content,
+          :latitude => hotel.find('latitude').first.content,
+          :longitude => hotel.find('longitude').first.content          
+        )
+      end
+      pager.replace(hotel_list)
+    end    
 
   end
 
   def show_hotel
     @place = Place.find(params[:id])
-    document = http_client("http://localhost:3001/hotels/#{params[:hotel_id]}.xml",{:latitude => @place.latitude, :longitude => @place.longitude})
+    document = http_client("/hotels/#{params[:hotel_id]}.xml",{:latitude => @place.latitude, :longitude => @place.longitude})
     hotel = document.find('//hotel').first
 
     @hotel = OpenStruct.new(
@@ -41,15 +48,14 @@ class PlacesController < ApplicationController
       :address => hotel.find('address').first.content,
       :rating => hotel.find('rating').first.content,
       :star_rating => hotel.find('starrating').first.content,
-      :description => hotel.find('description').first.content,
-      :destination => hotel.find('destination').first.content
+      :description => hotel.find('description').first.content
     )
 
   end
 
   def show_hotel_prices
     @place = Place.find(params[:id])
-    document = http_client("http://localhost:3001/hotels/#{params[:hotel_id]}/availability.xml",params[:availability])
+    document = http_client("/hotels/#{params[:hotel_id]}/availability.xml",params[:availability])
 
     @hotel = OpenStruct.new(
       :hotel_id => document.find('//hotel/@id').first.value,
@@ -68,12 +74,20 @@ class PlacesController < ApplicationController
   end
   
   private
+
+  def catch_filters
+    @catch_filters ||= {}
+    [:hotel_class, :lowest_price, :highest_price, :distance, :page, :per_page].each do |filter|
+      @catch_filters[filter] = params[filter] if params[filter]
+    end
+    @catch_filters
+  end
   
   def http_client(url,params={})
     params = params.merge(:affiliate_id => AFFILIATE_ID)
     SimpleService::HttpService.logger = logger
     client = SimpleService::HttpService.new(
-      :url => url, 
+      :url => API_HOST + url, 
       :timeout => 10, 
       :context => self
     )

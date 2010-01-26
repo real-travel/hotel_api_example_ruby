@@ -1,6 +1,9 @@
 class Place < ActiveRecord::Base
   acts_as_tree :order => 'name'
-
+  acts_as_mappable(
+      :lat_column_name => 'latitude',
+      :lng_column_name => 'longitude'
+  )
   def self.search(options={})
     # fetch = state, county, and city
     # state = 'California'; county = 'Santa Clara County'

@@ -1,15 +1,61 @@
 <h1>Hotels in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h1>
+<hr />
+<p>
+Star Rating [<% 1.upto(5) do |hotel_class| %>
+  <% if params[:hotel_class].to_i == hotel_class %>
+    &nbsp;<%= hotel_class %>&nbsp;  
+  <% else %>
+    &nbsp;<%= link_to hotel_class, place_path(@place, params.merge({:hotel_class => hotel_class})) %>&nbsp;
+  <% end %>    
+<% end %>]
+</p>
+<p>
+Lowest Price [<% 1.upto(15) do |lowest_price| %>
+  <% if params[:lowest_price].to_i == lowest_price*20 %>
+    &nbsp;<%= lowest_price*20 %>&nbsp;  
+  <% else %>
+    &nbsp;<%= link_to lowest_price*20, place_path(@place, params.merge({:lowest_price => lowest_price*20})) %>&nbsp;
+  <% end %>    
+<% end %>]
+</p>
+<p>
+Highest Price [<% 1.upto(15) do |highest_price| %>
+  <% if params[:highest_price].to_i == highest_price*20 %>
+    &nbsp;<%= highest_price*20 %>&nbsp;  
+  <% else %>
+    &nbsp;<%= link_to highest_price*20, place_path(@place, params.merge({:highest_price => highest_price*20})) %>&nbsp;
+  <% end %>    
+<% end %>]
+</p>
+<p>
+Distance from <%= @place.latitude %>/<%= @place.longitude %> in Miles[<% 1.upto(10) do |distance| %>
+  <% if params[:distance].to_i == distance*10 %>
+    &nbsp;<%= distance %>&nbsp;  
+  <% else %>
+    &nbsp;<%= link_to distance*10, place_path(@place, params.merge({:distance => distance*10})) %>&nbsp;  
+  <% end %>  
+<% end %>]
+</p>
+<p>
+<%= will_paginate @hotels %>  
+</p>
+<p><%= link_to "clear filters", place_path(@place) %></p>
+
 
 <hr />
+
 <% for hotel in @hotels %>
 <div>
   <%= image_tag hotel.photo, :width => 100, :style => 'float:left;margin:15px' %>
   <div style="min-height:100px">
-    <%= link_to hotel.name, show_hotel_place_path(@place, :hotel_id => hotel.hotel_id) %> (<%= hotel.rating %>;<%= hotel.star_rating %>)<br />
+    <%= link_to hotel.name, show_hotel_place_path(@place, :hotel_id => hotel.hotel_id) %><br />
     <address><%= hotel.address %></address>
+    <p>Star Rating: <%= hotel.star_rating %></p>
+    <p>Real Travel Rating: <%= hotel.rating %></p>
     <p><%= hotel.description %></p>
     <p><%= hotel.destination %></p>    
     <p><%= hotel.latitude %>/<%= hotel.longitude %></p>    
+    <p><%= @place.distance_from([hotel.latitude,hotel.longitude], :units=>:miles) %> Miles from <%= @place.name %></p>
   </div>
 </div>
 <hr />
