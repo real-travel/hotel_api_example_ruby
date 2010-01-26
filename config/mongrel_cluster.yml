@@ -1,6 +1,6 @@
 ---
 cwd: /home/web/example_api/current
-port: "8000"
+port: "8100"
 environment: production
 address: 127.0.0.1
 pid_file: log/mongrel.pid
