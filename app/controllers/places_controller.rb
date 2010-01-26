@@ -1,9 +1,10 @@
 require 'ruby-debug'
 require 'xml'
 require 'ostruct'
+
 class PlacesController < ApplicationController
   AFFILIATE_ID = 'f8ejKn3983H'
-  API_HOST = 'http://localhost:3001' # 'http://staging.realtravel.com'
+  API_HOST = 'http://staging.realtravel.com' # http://localhost:3001
 
   def index
     @places = ZipCode.all(:limit => 100, :conditions => 'latitude IS NOT NULL')
