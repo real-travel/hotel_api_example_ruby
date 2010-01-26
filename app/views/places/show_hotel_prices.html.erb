@@ -1,0 +1,15 @@
+<h1><%= @hotel.name %> Pricing</h1>
+<h3>located in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h3>
+
+<hr />
+
+<div>
+  <ul>
+    <% for price in @pricing %>
+      <li><%= link_to "#{price.name} #{price.price}", price.url %></li>
+    <% end -%>
+  </ul>
+</div>
+<hr />                                                     
+
+<%= link_to "Show places", places_path %>

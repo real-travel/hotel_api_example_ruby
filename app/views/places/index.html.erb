@@ -1,0 +1,18 @@
+<h1>Listing places</h1>
+
+<table>
+  <tr>
+    <th>City Name</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+  </tr>
+
+
+<% @places.each do |place| %>
+  <tr>
+    <td><%= link_to "#{place.name}, #{place.parent.name}, #{place.parent.parent.name}, #{place.parent.parent.parent.name}", place_path(place) %></td>
+    <td><%= place.latitude %></td>
+    <td><%= place.longitude %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,16 @@
+<h1>Hotels in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h1>
+
+<hr />
+<% for hotel in @hotels %>
+<div>
+  <%= image_tag hotel.photo, :width => 100, :style => 'float:left;margin:15px' %>
+  <div style="min-height:100px">
+    <%= link_to hotel.name, show_hotel_place_path(@place, :hotel_id => hotel.hotel_id) %> (<%= hotel.rating %>;<%= hotel.star_rating %>)<br />
+    <address><%= hotel.address %></address>
+    <p><%= hotel.description %></p>
+    <p><%= hotel.destination %></p>    
+    <p><%= hotel.latitude %>/<%= hotel.longitude %></p>    
+  </div>
+</div>
+<hr />
+<% end -%>
