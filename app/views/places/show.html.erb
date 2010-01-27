@@ -51,8 +51,11 @@ Distance from <%= @place.latitude %>/<%= @place.longitude %> in Miles[<% 1.upto(
     <%= link_to hotel.name, show_hotel_place_path(@place, :hotel_id => hotel.hotel_id) %><br />
     <address><%= hotel.address %></address>
     <p>Star Rating: <%= hotel.star_rating %></p>
+    <p>Recommendation Level: <%= hotel.recommendation %><br />
+      <%= img_tag "http://images.realtravel.com#{hotel.recommendation_image}" %></p>
     <p>Real Travel Rating: <%= hotel.rating %></p>
-    <p><%= hotel.description %></p>
+    <p>Amenities: <%= hotel.amenities %></p>    
+    <p><%= hotel.description %></p>    
     <p><%= hotel.destination %></p>    
     <p><%= hotel.latitude %>/<%= hotel.longitude %></p>    
     <p><%= @place.distance_from([hotel.latitude,hotel.longitude], :units=>:miles) %> Miles from <%= @place.name %></p>

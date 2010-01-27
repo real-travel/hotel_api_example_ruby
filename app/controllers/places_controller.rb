@@ -28,8 +28,11 @@ class PlacesController < ApplicationController
           :rating => hotel.find('rating').first.content,
           :star_rating => hotel.find('starrating').first.content,
           :description => hotel.find('description').first.content,
+          :amenities => hotel.find('amenities').first.content,
           :latitude => hotel.find('latitude').first.content,
-          :longitude => hotel.find('longitude').first.content          
+          :longitude => hotel.find('longitude').first.content,
+          :recommendation => hotel.find('recommendation').first.content,
+          :recommendation_image => hotel.find('recommendation').first.attributes['image'].value
         )
       end
       pager.replace(hotel_list)
