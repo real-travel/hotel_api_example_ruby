@@ -19,6 +19,7 @@ class PlacesController < ApplicationController
     
     @hotels = WillPaginate::Collection.create(page, per_page, total) do |pager|
       hotel_list = []
+
       document.find('//hotel').each do |hotel|
         hotel_list << OpenStruct.new(
           :hotel_id => hotel.find('@id').first.value,
@@ -32,7 +33,7 @@ class PlacesController < ApplicationController
           :latitude => hotel.find('latitude').first.content,
           :longitude => hotel.find('longitude').first.content,
           :recommendation => hotel.find('recommendation').first.content,
-          :recommendation_image => hotel.find('recommendation').first.attributes['image'].value
+          :recommendation_image => hotel.find('recommendation').first.attributes['image']
         )
       end
       pager.replace(hotel_list)
