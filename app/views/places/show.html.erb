@@ -69,7 +69,7 @@
       <% group.each do |distance| %>
       <li>
         <% if params[:distance].to_i == distance*10 %>
-          <%= distance %> miles 
+          <%= distance*10 %> miles 
         <% else %>
           <%= link_to "#{distance*10} miles", place_path(@place, params.merge({:distance => distance*10})) %>
         <% end %>  
