@@ -1,65 +1,155 @@
-<h1>Hotels in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h1>
-<hr />
-<p>
-Star Rating [<% 1.upto(5) do |hotel_class| %>
-  <% if params[:hotel_class].to_i == hotel_class %>
-    &nbsp;<%= hotel_class %>&nbsp;  
-  <% else %>
-    &nbsp;<%= link_to hotel_class, place_path(@place, params.merge({:hotel_class => hotel_class})) %>&nbsp;
-  <% end %>    
-<% end %>]
-</p>
-<p>
-Lowest Price [<% 1.upto(15) do |lowest_price| %>
-  <% if params[:lowest_price].to_i == lowest_price*20 %>
-    &nbsp;<%= lowest_price*20 %>&nbsp;  
-  <% else %>
-    &nbsp;<%= link_to lowest_price*20, place_path(@place, params.merge({:lowest_price => lowest_price*20})) %>&nbsp;
-  <% end %>    
-<% end %>]
-</p>
-<p>
-Highest Price [<% 1.upto(15) do |highest_price| %>
-  <% if params[:highest_price].to_i == highest_price*20 %>
-    &nbsp;<%= highest_price*20 %>&nbsp;  
-  <% else %>
-    &nbsp;<%= link_to highest_price*20, place_path(@place, params.merge({:highest_price => highest_price*20})) %>&nbsp;
-  <% end %>    
-<% end %>]
-</p>
-<p>
-Distance from <%= @place.latitude %>/<%= @place.longitude %> in Miles[<% 1.upto(10) do |distance| %>
-  <% if params[:distance].to_i == distance*10 %>
-    &nbsp;<%= distance %>&nbsp;  
-  <% else %>
-    &nbsp;<%= link_to distance*10, place_path(@place, params.merge({:distance => distance*10})) %>&nbsp;  
-  <% end %>  
-<% end %>]
-</p>
-<p>
-<%= will_paginate @hotels %>  
-</p>
-<p><%= link_to "clear filters", place_path(@place) %></p>
-
-
-<hr />
-
-<% for hotel in @hotels %>
-<div>
-  <%= image_tag hotel.photo, :width => 100, :style => 'float:left;margin:15px' %>
-  <div style="min-height:100px">
-    <%= link_to hotel.name, show_hotel_place_path(@place, :hotel_id => hotel.hotel_id) %><br />
-    <address><%= hotel.address %></address>
-    <p>Star Rating: <%= hotel.star_rating %></p>
-    <p>Recommendation Level: <%= hotel.recommendation %><br />
-      <%= image_tag "http://staging.realtravel.com#{hotel.recommendation_image}" %></p>
-    <p>Real Travel Rating: <%= hotel.rating %></p>
-    <p>Amenities: <%= hotel.amenities %></p>    
-    <p><%= hotel.description %></p>    
-    <p><%= hotel.destination %></p>    
-    <p><%= hotel.latitude %>/<%= hotel.longitude %></p>    
-    <p><%= @place.distance_from([hotel.latitude,hotel.longitude], :units=>:miles) %> Miles from <%= @place.name %></p>
-  </div>
+<div id="page_heading">
+  <h1>Hotels in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h1>
 </div>
-<hr />
+<div id="filters" class="clearfix">
+  <div class="clearfix">
+    <h2 class="italicize">Filter your hotels | <%= link_to "clear filters", place_path(@place) %></h2>
+    <div class="span-4 module append-1">
+      <h3>Hotel Class</h3>
+      <ul class="simple_list">
+      <% 1.upto(5) do |hotel_class| %>
+      <li>
+        <% if params[:hotel_class].to_i == hotel_class %>
+          <%= hotel_class %> star <%= image_tag "/images/elements/icons/star_rating-#{hotel_class}" %>
+        <% else %>
+          <%= link_to " #{hotel_class} star #{image_tag "/images/elements/icons/star_rating-#{hotel_class}"}", place_path(@place, params.merge({:hotel_class => hotel_class})) %>
+        <% end %> 
+      </li>
+      <% end %>
+      </ul>
+    </div>
+  
+    <div class="span-6 module">
+      <h3>Lowest Price</h3>
+    
+      <% [*1..15].in_groups_of(5).each_with_index do |group, index| %>
+      <div class="span-2<%= ' last' if index == 2 %>">
+      <ul class="simple_list">
+        <% group.each do |lowest_price| %>
+       <li>
+          <% if params[:lowest_price].to_i == lowest_price*20 %>
+            &nbsp;<%= number_to_currency(lowest_price*20, :precision=>0) %>&nbsp;  
+          <% else %>
+            &nbsp;<%= link_to number_to_currency(lowest_price*20, :precision=>0), place_path(@place, params.merge({:lowest_price => lowest_price*20})) %>&nbsp;
+          <% end %>  
+        </li>  
+        <% end %>
+      
+      </ul>
+      </div>
+      <% end %>
+    
+    </div>
+  
+    <div class="span-6 module">
+      <h3>Highest Price</h3>
+      <% [*1..15].in_groups_of(5).each_with_index do |group, index| %>
+      <div class="span-2<%= ' last' if index == 2 %>">
+      <ul class="simple_list">
+      <% group.each do |highest_price| %>
+      <li>
+        <% if params[:highest_price].to_i == highest_price*20 %>
+          &nbsp;<%= number_to_currency(highest_price*20, :precision=>0) %>&nbsp;  
+        <% else %>
+          &nbsp;<%= link_to number_to_currency(highest_price*20, :precision=>0), place_path(@place, params.merge({:highest_price => highest_price*20})) %>&nbsp;
+        <% end %>    
+      </li>  
+      <% end %>
+    
+    </ul>
+    </div>
+    <% end %>
+    </div>
+  
+    <div class="prepend-1 span-4 module last">
+      <h3>Distance</h3>
+      <% [*1..10].in_groups_of(5).each_with_index do |group, index| %>
+      <div class="span-2<%= ' last' if index == 1 %>">
+      <ul class="simple_list">
+      <% group.each do |distance| %>
+      <li>
+        <% if params[:distance].to_i == distance*10 %>
+          <%= distance %> miles 
+        <% else %>
+          <%= link_to "#{distance*10} miles", place_path(@place, params.merge({:distance => distance*10})) %>
+        <% end %>  
+      </li>
+      <% end %>
+      </ul>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <%= will_paginate @hotels %>
+</div>
+
+
+<ul id="hotel_list">
+<% for hotel in @hotels %>
+<li>
+  <div class="highlight"></div>
+  <div class="hotel_heading">
+    <h2><%= link_to hotel.name, show_hotel_place_path(@place, :hotel_id => hotel.hotel_id) %></h2>
+    <address><%= hotel.address %></address>
+  </div>
+  <div class="shadow"></div>
+  <div class="hotel_content clearfix">
+    <div class="span-4 append-1">
+      <div class="module">
+        <%= image_tag hotel.photo, :width => 150 %>
+      </div>
+      <div class="module">
+        <% form_for :availability, :url => show_hotel_prices_place_path(@place, :hotel_id => hotel.hotel_id) do |f| %>
+          <h4>Check Prices</h4>
+          <dl>
+            <dt><label for="begin_date">Check-in:</label></dt>
+            <dd><%= f.text_field :begin_date, {:size => '10'} %></dd>
+            <dt><label for="end_date">Check-out:</label></dt>
+            <dd><%= f.text_field :end_date, {:size => '10'} %></dd>
+            <dd class="submit_field">
+              <%= submit_tag 'Get Rates', :class=>"button" %>
+            </dd>
+          </dl>
+        <% end -%>
+      </div>
+    </div>
+    <div class="span-9 append-1">
+      <p><%= image_tag "http://staging.realtravel.com#{hotel.recommendation_image}" %></p>
+      
+       
+      <p><%= truncate(hotel.description, :omission => "... #{link_to 'more &raquo;', show_hotel_place_path(@place, :hotel_id => hotel.hotel_id)}", :length => 400) %></p>    
+      <p><%= number_with_precision(@place.distance_from([hotel.latitude,hotel.longitude], :units=>:miles), :precision => 1) %> miles from <strong><%= @place.name %></strong></p>
+      <p><%= hotel.destination %></p>    
+      
+    </div>
+    <div class="span-7 last">
+      <div class="module">
+        <h3>Amenities include:</h3>
+        <%= hotel.amenities.gsub(/;/, ", ") %>
+      </div>
+      <div class="module">
+        <h3>Other items of interest:</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="heading_col">Hotel Class:</td>
+            <td><%= image_tag "/images/elements/icons/star_rating-#{hotel.star_rating}" %></td>
+          </tr>
+          <tr class="even">
+            <td class="heading_col">Real Travel Rating:</td>
+            <td><%= hotel.rating %></td>
+          </tr>
+          <tr>
+            <td class="heading_col">Lat/Long:</td>
+            <td><%= hotel.latitude %>/<%= hotel.longitude %></td>
+          </tr>
+        </table> 
+      </div>
+    </div>
+  </div>
+</li>
 <% end -%>
+</ul>
+<div class="highlight"></div>
+<div class="headroom content">
+  <%= will_paginate @hotels %>
+</div>

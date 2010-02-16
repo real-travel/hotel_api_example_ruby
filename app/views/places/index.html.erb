@@ -1,6 +1,8 @@
-<h1>Listing places</h1>
+<div id="page_heading">
+  <h1>Places in the world</h1>
+</div>
 
-<p>
+<!-- <p>
 *[<% 1.upto(5) do |hotel_class| %>
   &nbsp;<%= link_to hotel_class, places_path(params.merge({:hotel_class => hotel_class})) %>&nbsp;
 <% end %>]
@@ -9,21 +11,25 @@
 m[<% 1.upto(10) do |distance| %>
   &nbsp;<%= link_to distance*10, places_path(params.merge({:distance => distance*10})) %>&nbsp;
 <% end %>]
-</p>
+</p> -->
 
+<div class="content">
 <table>
+  <thead>
   <tr>
     <th>City Name</th>
     <th>Latitude</th>
     <th>Longitude</th>
   </tr>
-
-
-<% @places.each do |place| %>
-  <tr>
-    <td><%= link_to "#{place.name}, #{place.parent.name}, #{place.parent.parent.name}, #{place.parent.parent.parent.name}", place_path(place, params.delete_if { |k,v| ['action', 'controller'].include?(k) }) %></td>
-    <td><%= place.latitude %></td>
-    <td><%= place.longitude %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @places.each do |place| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= link_to "#{place.name}, #{place.parent.name}, #{place.parent.parent.name}, #{place.parent.parent.parent.name}", place_path(place, params.delete_if { |k,v| ['action', 'controller'].include?(k) }) %></td>
+      <td><%= place.latitude %></td>
+      <td><%= place.longitude %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Places: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'blueprint', 'application' %>
+</head>
+<body>
+  <div id="header" class="clearfix">
+    <%= link_to "Your Hotel System", places_path(), :id=>"site_logo" %>
+    <ul id="main_nav">
+      <li><%= link_to "All destinations", places_path() %></li>
+      <%- if controller.action_name == "show_hotel" -%>
+      <li class="back_link"><%= link_to "Back to destination &raquo;", place_path(@place) %></li>
+      <%- end -%>
+      <%- if controller.action_name == "show_hotel_prices" -%>
+      <li class="back_link"><%= link_to "Back to hotel &raquo;", show_hotel_place_path(@place, :hotel_id => @hotel.hotel_id) %></li>
+      <%- end -%>
+    </ul>
+  </div>
+  <div id="main">
+    <div class="container">
+      <p style="color: green"><%= flash[:notice] %></p>
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>

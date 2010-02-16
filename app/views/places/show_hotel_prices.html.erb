@@ -1,15 +1,24 @@
-<h1><%= @hotel.name %> Pricing</h1>
-<h3>located in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h3>
-
-<hr />
-
-<div>
-  <ul>
-    <% for price in @pricing %>
-      <li><%= link_to "#{price.name} #{price.price}", price.url %></li>
-    <% end -%>
-  </ul>
-</div>
-<hr />                                                     
-
-<%= link_to "Show places", places_path %>
+<ul id="hotel_list">
+  <li>
+    <div class="highlight"></div>
+    <div class="hotel_heading">
+      <h1><%= @hotel.name %> Pricing</h1>
+    </div>
+    <div class="shadow"></div>
+    <div class="hotel_content clearfix">
+      <h3>Located in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h3>
+      <ul id="price_list">
+        <% for price in @pricing %>
+          <% 
+            if not price.price == "Check Site"
+              the_price = number_to_currency(price.price)
+            else
+              the_price = "Check Site"
+            end
+          %>
+          <li><%= link_to "<strong>#{price.name}</strong> => <span class='price'>#{the_price}</span>", price.url %></li>
+        <% end -%>
+      </ul>
+    </div>
+  </li>
+</ul>

@@ -1,0 +1,228 @@
+/* @group STRUCTURE */
+#header{
+	padding-left: 75px;
+}
+
+	#header .container{
+		padding-bottom: 15px;
+		margin-bottom: 15px;
+		border-bottom: 2px solid #eee;
+	}
+
+#page_heading{
+	background-color: #b3d742;
+	border: 3px dashed #a4c639;
+	padding: 10px;
+	width: 850px;
+	margin-left: 75px;
+	margin-bottom: 20px;
+}
+
+	#page_heading h1{
+		margin: 0;
+		line-height: normal;
+		font-weight: bold;
+		font-size: 1.8em;
+		color: #526713;
+	}
+	
+#filters{
+	margin: 0 0 20px 75px;
+	width: 910px;
+}
+
+.content{
+	padding-left: 75px;
+}
+
+/* @end */
+
+/* @group NAVIGATION */
+ul#main_nav{
+	float: left;
+	line-height: 70px;
+	font-size: 1.8em;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+	ul#main_nav li{
+		float: left;
+		margin-right: 10px;
+	}
+	
+		ul#main_nav li.back_link{
+			font-style: italic;
+			font-family: Georgia, "Times New Roman", Times, serif;
+		}
+	
+	ul#main_nav li a{
+		padding: 3px 10px;
+		color: #aaa;
+	}
+		
+		ul#main_nav li a:hover{
+			background-color: #d9eba1;
+			color: #00aeef;
+		}
+
+
+/* @end */
+
+/* @group ELEMENTS */
+
+/* @group PAGINATION */
+.pagination { font-size: 1.2em;}
+.pagination a, .pagination span.current, .pagination span.disabled { 
+	padding: 2px 5px; 
+	line-height: 1.4em;
+ }
+.pagination a {text-decoration: underline; }
+.pagination span.current { background-color: #00aeef; border-color: #133155; color: #fff; }
+.pagination a:hover, .pagination a:active { color: #c22918; background-color: #d9eba1; text-decoration: none;}
+.pagination span.disabled { color: #666; }
+
+
+/* @end */
+
+/* @group LISTS */
+ul.simple_list{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+	ul.simple_list li{
+		line-height: 1.8em;
+		border-bottom: 1px dashed #ddd;
+	}
+
+ul#price_list{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 1.8em;
+}
+
+	ul#price_list li{
+		margin-bottom: 5px;
+	}
+	
+	ul#price_list li a{
+		display: block;
+		padding: 10px;
+		background-color: #fafafa;
+		border: 3px dashed #f4f4f4;
+	}
+	
+		ul#price_list li a:hover{
+			background-color: #00aeef;
+			color: #fff;
+			border-color: #0091c9;
+		}
+		
+		ul#price_list .price{
+			font-style: italic;
+			font-family: Georgia, "Times New Roman", Times, serif;
+			color: #b3d742;
+		}
+
+/* @end */
+
+/* @group LOGOS */
+#site_logo{
+	display: block;
+	width: 430px;
+	height: 70px;
+	background-image: url(/images/elements/logos/your_hotel_system.gif);
+	text-indent: -9999px;
+	float: left;
+	margin-right: 30px;
+}
+
+
+/* @end */
+
+/* @group HOTEL LIST */
+ul#hotel_list{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+	ul#hotel_list li{
+		margin-bottom: 25px;
+	}
+
+	.hotel_heading{
+		padding: 5px 15px 5px 75px;
+	
+		background-color: #d7eba0;
+		background: rgba(179, 215, 66, 0.5);
+	}
+	
+		.hotel_heading h2, .hotel_heading h1{
+			font-size: 2.4em;
+			margin-bottom: 5px;
+			line-height: normal;
+		}
+		
+			.hotel_heading h2 a{
+				color: #3c3b3c;
+			}
+			
+				.hotel_heading h2 a:hover{
+					color: #596f16;
+				}
+	.hotel_content{
+		padding-left: 75px;
+	}
+
+.shadow{
+	margin-bottom: 15px;
+	padding: 2px;
+	background-color: #85994f;
+	background: rgba(133, 153, 79, 0.5);
+}
+
+.highlight{
+	padding: 2px;
+	background-color: #83cae4;
+	background: rgba(131, 202, 228, 0.5);
+}
+
+td.heading_col{
+		font-weight: bold;
+		text-align: right;
+}
+
+/* @end */
+
+/* @group MODULES */
+.module{
+	margin-bottom: 20px;
+}
+
+	.module h3, .module h4{
+		margin-bottom: 8px;
+		padding-bottom: 8px;
+		border-bottom: 3px solid #dadada;
+		text-transform: uppercase;
+		font-weight: bold;
+		color: #6a6a6a;
+	}
+
+/* @end */
+
+/* @group TABLES */
+table td{
+	border-bottom: 1px solid #eee;
+}
+
+
+/* @end */
+
+
+
+/* @end */
