@@ -12,7 +12,7 @@
         <% if params[:hotel_class].to_i == hotel_class %>
           <%= hotel_class %> star <%= image_tag "/images/elements/icons/star_rating-#{hotel_class}" %>
         <% else %>
-          <%= link_to " #{hotel_class} star #{image_tag "/images/elements/icons/star_rating-#{hotel_class}"}", place_path(@place, params.merge({:hotel_class => hotel_class})) %>
+          <%= link_to " #{hotel_class} star #{image_tag "/images/elements/icons/star_rating-#{hotel_class}.gif"}", place_path(@place, params.merge({:hotel_class => hotel_class})) %>
         <% end %> 
       </li>
       <% end %>
@@ -114,7 +114,7 @@
       </div>
     </div>
     <div class="span-9 append-1">
-      <p><%= image_tag "http://staging.realtravel.com#{hotel.recommendation_image}" %></p>
+      <p><%= image_tag "http://staging.realtravel.com#{hotel.recommendation_image}.gif" %></p>
       
        
       <p><%= truncate(hotel.description, :omission => "... #{link_to 'more &raquo;', show_hotel_place_path(@place, :hotel_id => hotel.hotel_id)}", :length => 400) %></p>    
