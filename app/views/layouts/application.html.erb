@@ -7,6 +7,7 @@
   <title>Places: <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'blueprint', 'application', 'jquery-ui' %>
   <%= javascript_include_tag "jquery-1.4.1.min", "jquery-ui-1.7.2.min" %>
+  <!--[if IE]><%= stylesheet_link_tag 'ie' %><![endif]-->
 </head>
 <body>
   <div id="header" class="clearfix">
@@ -22,7 +23,7 @@
     </ul>
   </div>
   <div id="main">
-    <div class="container">
+    <div class="container clearfix">
       <p style="color: green"><%= flash[:notice] %></p>
       <%= yield %>
     </div>

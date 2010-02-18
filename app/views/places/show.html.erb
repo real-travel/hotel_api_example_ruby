@@ -86,7 +86,7 @@
 
 <ul id="hotel_list">
 <% for hotel in @hotels %>
-<li>
+<li class="clearfix">
   <div class="highlight"></div>
   <div class="hotel_heading">
     <h2><%= link_to hotel.name, show_hotel_place_path(@place, :hotel_id => hotel.hotel_id) %></h2>
