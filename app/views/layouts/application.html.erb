@@ -5,7 +5,8 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Places: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'blueprint', 'application' %>
+  <%= stylesheet_link_tag 'blueprint', 'application', 'jquery-ui' %>
+  <%= javascript_include_tag "jquery-1.4.1.min", "jquery-ui-1.7.2.min" %>
 </head>
 <body>
   <div id="header" class="clearfix">
@@ -26,5 +27,30 @@
       <%= yield %>
     </div>
   </div>
+  <script type="text/javascript" charset="utf-8">
+  $(function() {
+    $(".date_box").each(function(){
+      var today = new Date();
+						
+			$(this).hasClass("check_in") ? today.setDate(today.getDate() + 7) : today.setDate(today.getDate() + 10);
+			var curr_date = today.getDate();
+			var curr_month = today.getMonth() + 1;
+			var curr_year = today.getFullYear();
+
+		
+			$(this).val(curr_month + "/" + curr_date + "/" + curr_year);
+      $(this).datepicker({
+        gotoCurrent: true,
+        showButtonPanel: true,
+        minDate: 0,
+        showOn: 'both',
+  			buttonText: 'Choose date',
+  			altFormat: 'mm/dd/yyyy',
+  			buttonImage: '/images/elements/icons/calendar.gif',
+  			buttonImageOnly: true
+      });
+    });
+  });
+  </script>
 </body>
 </html>

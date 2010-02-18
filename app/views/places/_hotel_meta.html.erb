@@ -1,0 +1,21 @@
+<div class="module">
+  <h3>Amenities include:</h3>
+  <%= hotel.amenities.gsub(/;/, ", ") %>
+</div>
+<div class="module">
+  <h3>Other items of interest:</h3>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="heading_col">Hotel Class:</td>
+      <td><%= image_tag "/images/elements/icons/star_rating-#{hotel.star_rating}" %></td>
+    </tr>
+    <tr class="even">
+      <td class="heading_col">Real Travel Rating:</td>
+      <td><%= hotel.rating %></td>
+    </tr>
+    <tr>
+      <td class="heading_col">Lat/Long:</td>
+      <td><%= hotel.latitude %>/<%= hotel.longitude %></td>
+    </tr>
+  </table> 
+</div>

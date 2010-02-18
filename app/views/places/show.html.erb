@@ -98,52 +98,17 @@
       <div class="module">
         <%= image_tag hotel.photo, :width => 150 %>
       </div>
-      <div class="module">
-        <% form_for :availability, :url => show_hotel_prices_place_path(@place, :hotel_id => hotel.hotel_id) do |f| %>
-          <h4>Check Prices</h4>
-          <dl>
-            <dt><label for="begin_date">Check-in:</label></dt>
-            <dd><%= f.text_field :begin_date, {:size => '10'} %></dd>
-            <dt><label for="end_date">Check-out:</label></dt>
-            <dd><%= f.text_field :end_date, {:size => '10'} %></dd>
-            <dd class="submit_field">
-              <%= submit_tag 'Get Rates', :class=>"button" %>
-            </dd>
-          </dl>
-        <% end -%>
-      </div>
+      <%= render :partial=>"check_rates_form", :locals=>{:hotel=>hotel} %>
     </div>
     <div class="span-9 append-1">
       <p><%= image_tag "http://staging.realtravel.com#{hotel.recommendation_image}.gif" %></p>
-      
-       
       <p><%= truncate(hotel.description, :omission => "... #{link_to 'more &raquo;', show_hotel_place_path(@place, :hotel_id => hotel.hotel_id)}", :length => 400) %></p>    
       <p><%= number_with_precision(@place.distance_from([hotel.latitude,hotel.longitude], :units=>:miles), :precision => 1) %> miles from <strong><%= @place.name %></strong></p>
       <p><%= hotel.destination %></p>    
       
     </div>
     <div class="span-7 last">
-      <div class="module">
-        <h3>Amenities include:</h3>
-        <%= hotel.amenities.gsub(/;/, ", ") %>
-      </div>
-      <div class="module">
-        <h3>Other items of interest:</h3>
-        <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="heading_col">Hotel Class:</td>
-            <td><%= image_tag "/images/elements/icons/star_rating-#{hotel.star_rating}" %></td>
-          </tr>
-          <tr class="even">
-            <td class="heading_col">Real Travel Rating:</td>
-            <td><%= hotel.rating %></td>
-          </tr>
-          <tr>
-            <td class="heading_col">Lat/Long:</td>
-            <td><%= hotel.latitude %>/<%= hotel.longitude %></td>
-          </tr>
-        </table> 
-      </div>
+      <%= render :partial=>"hotel_meta", :locals=>{:hotel=>hotel} %>
     </div>
   </div>
 </li>

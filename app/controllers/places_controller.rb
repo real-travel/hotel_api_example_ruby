@@ -53,7 +53,10 @@ class PlacesController < ApplicationController
       :address => hotel.find('address').first.content,
       :rating => hotel.find('rating').first.content,
       :star_rating => hotel.find('starrating').first.content,
-      :description => hotel.find('description').first.content
+      :amenities => hotel.find('amenities').first.content,
+      :description => hotel.find('description').first.content,
+      :latitude => hotel.find('latitude').first.content,
+      :longitude => hotel.find('longitude').first.content
     )
 
   end

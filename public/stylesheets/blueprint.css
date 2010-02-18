@@ -167,7 +167,10 @@ background-color: -moz-linear-gradient(
 			color: #fff;
 		}
 
-
+input.date_box{
+	width: 80%;
+	margin-right: 4px;
+}
 
 /* grid.css */
 .container {width:950px;position: relative;}

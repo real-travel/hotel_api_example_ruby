@@ -11,19 +11,8 @@
         <div class="module">
           <%= image_tag @hotel.photo, :width => 230 %>
         </div>
-        <div class="module">
-          <% form_for :availability, :url => show_hotel_prices_place_path(@place, :hotel_id => @hotel.hotel_id) do |f| %>
-            <h4>Check Prices</h4>
-            <dl>
-              <dt><label for="begin_date">Check-in:</label></dt>
-              <dd><%= f.text_field :begin_date, {:size => '10'} %></dd>
-              <dt><label for="end_date">Check-out:</label></dt>
-              <dd><%= f.text_field :end_date, {:size => '10'} %></dd>
-              <dd class="submit_field">
-                <%= submit_tag 'Get Rates', :class=>"button" %>
-              </dd>
-            </dl>
-          <% end -%>
+        <div class="span-4">
+        <%= render :partial=>"check_rates_form", :locals=>{:hotel=>@hotel} %>
         </div>
       </div>
       <div class="span-8 append-1">
@@ -32,22 +21,7 @@
         <p><%= @hotel.destination %></p>  
       </div>
       <div class="span-6 last">
-        <div class="module">
-          <table border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td class="heading_col">Hotel Class:</td>
-              <td><%= image_tag "/images/elements/icons/star_rating-#{@hotel.star_rating}.gif" %></td>
-            </tr>
-            <tr class="even">
-              <td class="heading_col">Real Travel Rating:</td>
-              <td><%= @hotel.rating %></td>
-            </tr>
-            <tr>
-              <td class="heading_col">Lat/Long:</td>
-              <td><%= @hotel.latitude %>/<%= @hotel.longitude %></td>
-            </tr>
-          </table> 
-        </div>
+        <%= render :partial=>"hotel_meta", :locals=>{:hotel=>@hotel} %>
       </div>
     </div>
 </li>

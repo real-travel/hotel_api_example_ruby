@@ -1,0 +1,14 @@
+<div class="module">
+<% form_for :availability, :url => show_hotel_prices_place_path(@place, :hotel_id => hotel.hotel_id) do |f| %>
+  <h4>Check Prices</h4>
+  <dl>
+    <dt><label for="begin_date">Check-in:</label></dt>
+    <dd><%= f.text_field :begin_date, {:size => '10', :class=>"date_box check_in", :id=>"check_in_date-#{hotel.id}"} %></dd>
+    <dt><label for="end_date">Check-out:</label></dt>
+    <dd><%= f.text_field :end_date, {:size => '10', :class=>"date_box check_out", :id=>"check_out_date-#{hotel.id}"} %></dd>
+    <dd class="submit_field">
+      <%= submit_tag 'Get Rates', :class=>"button" %>
+    </dd>
+  </dl>
+<% end -%>
+</div>
