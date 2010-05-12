@@ -19,14 +19,13 @@
       <div class="span-8 append-1">
         <h3>Located in <%= @place.name %>, <%= @place.parent.name %>, <%= @place.parent.parent.name %>, <%= @place.parent.parent.parent.name %></h3>
         <%= render :partial=>"hotel_meta", :locals=>{:hotel=>@hotel} %>
-        
         <p><%= @hotel.description %></p>
         <p><%= @hotel.destination %></p>  
       </div>
       <div class="prepend-1 span-5 last">
         <div class="module">
           <h3>Top rated hotels</h3>
-        <script type="text/javascript" charset="utf-8" src="<%= PlacesController::API_HOST %>/widgets?id=190x600_shopper_advanced_banner&aid=<%= PlacesController::AFFILIATE_ID %>&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
+          <script type="text/javascript" charset="utf-8" src="<%= PlacesController::API_HOST %>/widgets?id=190x600_shopper_advanced_banner&aid=<%= PlacesController::AFFILIATE_ID %>&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
         </div>
       </div>
     </div>
