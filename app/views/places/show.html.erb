@@ -10,7 +10,7 @@
       <% 1.upto(5) do |hotel_class| %>
       <li>
         <% if params[:hotel_class].to_i == hotel_class %>
-          <%= hotel_class %> star <%= image_tag "/images/elements/icons/star_rating-#{hotel_class}" %>
+          <%= hotel_class %> star <%= image_tag "/images/elements/icons/star_rating-#{hotel_class}.gif" %>
         <% else %>
           <%= link_to " #{hotel_class} star #{image_tag "/images/elements/icons/star_rating-#{hotel_class}.gif"}", place_path(@place, params.merge({:hotel_class => hotel_class})) %>
         <% end %> 
@@ -102,7 +102,7 @@
       <%#= render :partial=>"check_rates_form", :locals=>{:hotel=>hotel} %>
     </div>
     <div class="span-9 append-1">
-      <p><%= image_tag "http://realtravel.com#{hotel.recommendation_image}.gif" %></p>
+      <p><%= image_tag "http://realtravel.com#{hotel.recommendation_image}" %></p>
       <p><%= truncate(hotel.description, :omission => "... #{link_to 'more &raquo;', show_hotel_place_path(@place, :hotel_id => hotel.hotel_id)}", :length => 400) %></p>    
       <p><%= number_with_precision(@place.distance_from([hotel.latitude,hotel.longitude], :units=>:miles), :precision => 1) %> miles from <strong><%= @place.name %></strong></p>
       <p><%= hotel.destination %></p>    
