@@ -230,8 +230,7 @@ table td{
 	padding: 20px 0 20px 70px;
 }
 
-#rt_rtpa_button_widget a#rt_rtpa_iframe_open_toggler{
-	text-transform: uppercase;
+a.rt_open_link{
 	display: block;
 	font-weight: bold;
 	text-decoration: none;
@@ -243,7 +242,7 @@ table td{
 	background-color: #b3d742;
 }
 
-#rt_rtpa_button_widget a#rt_rtpa_iframe_open_toggler:hover{
+a.rt_open_link:hover{
 		background-color: #7cd6f7;
 		border-color: #7cc6e2;
 		color: #111;
