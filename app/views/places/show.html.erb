@@ -98,7 +98,8 @@
       <div class="module">
         <%= image_tag hotel.photo, :width => 150 %>
       </div>
-      <%= render :partial=>"check_rates_form", :locals=>{:hotel=>hotel} %>
+      <script type="text/javascript" charset="utf-8" src="http://realtravel.com/widgets?id=rtpa_link_button&aid=test_affiliate&hotel_id=<%=  hotel.hotel_id %>"></script>
+      <%#= render :partial=>"check_rates_form", :locals=>{:hotel=>hotel} %>
     </div>
     <div class="span-9 append-1">
       <p><%= image_tag "http://staging.realtravel.com#{hotel.recommendation_image}.gif" %></p>
@@ -118,5 +119,6 @@
 <div class="headroom content">
   <%= will_paginate @hotels %>
 </div>
-
-<script type="text/javascript" charset="utf-8" src="http://staging.realtravel.com:8031/widgets?size=190x600_basic&aid=ifly1&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
+<div class="advertisement">
+<script type="text/javascript" charset="utf-8" src="http://realtravel.com/widgets?id=650x200_shopper_basic_banner&aid=test_affiliate&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
+</div>

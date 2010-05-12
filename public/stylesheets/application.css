@@ -224,6 +224,33 @@ table td{
 
 /* @end */
 
+/* @group WIDGETS */
 
+.advertisement{
+	padding: 20px 0 20px 70px;
+}
+
+#rt_rtpa_button_widget a#rt_rtpa_iframe_open_toggler{
+	text-transform: uppercase;
+	display: block;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 1.4em;
+	line-height: 1.8em;
+	padding: 0 10px;
+	border: 1px solid #a4c639;
+	color: #526713;
+	background-color: #b3d742;
+}
+
+#rt_rtpa_button_widget a#rt_rtpa_iframe_open_toggler:hover{
+		background-color: #7cd6f7;
+		border-color: #7cc6e2;
+		color: #111;
+	}
+
+
+
+/* @end */
 
 /* @end */
