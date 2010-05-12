@@ -12,7 +12,7 @@
           <%= image_tag @hotel.photo, :width => 230 %>
         </div>
         <div class="span-4">
-          <script type="text/javascript" charset="utf-8" src="http://realtravel.com/widgets?id=rtpa_link_button&aid=test_affiliate&hotel_id=<%= @hotel.hotel_id %>"></script>
+          <script type="text/javascript" charset="utf-8" src="<%= PlacesController::API_HOST %>/widgets?id=rtpa_link_button&aid=<%= PlacesController::AFFILIATE_ID %>&hotel_id=<%= @hotel.hotel_id %>"></script>
         <%#= render :partial=>"check_rates_form", :locals=>{:hotel=>@hotel} %>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div class="prepend-1 span-5 last">
         <div class="module">
           <h3>Top rated hotels</h3>
-        <script type="text/javascript" charset="utf-8" src="http://realtravel.com/widgets?id=190x600_shopper_advanced_banner&aid=test_affiliate&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
+        <script type="text/javascript" charset="utf-8" src="<%= PlacesController::API_HOST %>/widgets?id=190x600_shopper_advanced_banner&aid=<%= PlacesController::AFFILIATE_ID %>&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
         </div>
       </div>
     </div>
