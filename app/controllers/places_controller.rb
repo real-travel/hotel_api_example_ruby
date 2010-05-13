@@ -4,7 +4,7 @@ require 'ostruct'
 
 class PlacesController < ApplicationController
   AFFILIATE_ID = 'ifly2'
-  API_HOST = 'http://apps-expedia.staging.realtravel.com' #'http://api.realtravel.com' # http://localhost:3001
+  API_HOST = 'http://realtravel.com' #'http://api.realtravel.com' # http://localhost:3001
 
   def index
     @places = ZipCode.all(:limit => 100, :conditions => 'latitude IS NOT NULL')
