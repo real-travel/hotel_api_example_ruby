@@ -4,11 +4,11 @@ require 'ostruct'
 
 class PlacesController < ApplicationController
 
-  AFFILIATE_ID = 'default'
+  AFFILIATE_ID = 'ifly2'
   API_HOST = 'http://api.realtravel.com' #'http://api.realtravel.com' # http://localhost:3001
 
   def index
-    @places = City.paginate(:per_page => 100, :page => page[:page] || 1, :conditions => 'latitude IS NOT NULL AND longitude IS NOT NULL')
+    @places = ZipCode.paginate(:per_page => 100, :page => params[:page] || 1, :conditions => 'latitude IS NOT NULL AND longitude IS NOT NULL')
   end
 
   def show # hotel listing for place
@@ -77,16 +77,18 @@ class PlacesController < ApplicationController
     document.find('//hotel').each do |hotel|
 
       hotel_list << OpenStruct.new(
-        :hotel_id => hotel.find('@id').first.value,
-        :photo => hotel.find('photo').first.content,
-        :name => hotel.find('name').first.content,
-        :address => hotel.find('address').first.content,
-        :rating => hotel.find('rating').first.content,
-        :star_rating => hotel.find('starrating').first.content,
-        :amenities => hotel.find('amenities').first.content,
-        :description => hotel.find('description').first.content,
-        :latitude => hotel.find('latitude').first.content,
-        :longitude => hotel.find('longitude').first.content
+          :hotel_id => hotel.find('@id').first.value,
+          :photo => hotel.find('photo').first.content,
+          :name => hotel.find('name').first.content,
+          :address => hotel.find('address').first.content,
+          :rating => hotel.find('rating').first.content,
+          :star_rating => hotel.find('starrating').first.content,
+          :description => hotel.find('description').first.content,
+          :amenities => hotel.find('amenities').first.content,
+          :latitude => hotel.find('latitude').first.content,
+          :longitude => hotel.find('longitude').first.content,
+          :recommendation => hotel.find('recommendation').first.content,
+          :recommendation_image => hotel.find('recommendation').first.attributes['image']
       )
       
     end
