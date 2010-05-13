@@ -2,17 +2,6 @@
   <h1>Places in the world</h1>
 </div>
 
-<!-- <p>
-*[<% 1.upto(5) do |hotel_class| %>
-  &nbsp;<%= link_to hotel_class, places_path(params.merge({:hotel_class => hotel_class})) %>&nbsp;
-<% end %>]
-</p>
-<p>
-m[<% 1.upto(10) do |distance| %>
-  &nbsp;<%= link_to distance*10, places_path(params.merge({:distance => distance*10})) %>&nbsp;
-<% end %>]
-</p> -->
-
 <div class="content">
 <table border="0" cellspacing="0" cellpadding="0">
   <thead>
@@ -31,5 +20,6 @@ m[<% 1.upto(10) do |distance| %>
     </tr>
   <% end %>
   </tbody>
+  <%= will_paginate @places %>
 </table>
 </div>
