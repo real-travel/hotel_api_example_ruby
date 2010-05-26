@@ -1,11 +1,7 @@
-require 'ruby-debug'
 require 'xml'
 require 'ostruct'
 
 class PlacesController < ApplicationController
-
-  AFFILIATE_ID = 'ifly2'
-  API_HOST = 'http://api.realtravel.com' #'http://api.realtravel.com' # http://localhost:3001
 
   def index
     @places = ZipCode.paginate(:per_page => 100, :page => params[:page] || 1, :conditions => 'latitude IS NOT NULL AND longitude IS NOT NULL')
@@ -62,14 +58,8 @@ class PlacesController < ApplicationController
   end
   
   def http_client(url,params={})
-    params = params.merge(:affiliate_id => AFFILIATE_ID)
-    SimpleService::HttpService.logger = logger
-    client = SimpleService::HttpService.new(
-      :url => API_HOST + url, 
-      :timeout => 60, 
-      :context => self
-    )
-    XML::Parser.string(client.get(params)).parse
+    params = params.merge(:aid => RT::API.settings['aid'])
+    XML::Parser.string(Net::HTTP.get_response(URI.parse("#{RT::API.settings['host']}#{url}?#{params.to_query}")).body).parse
   end
 
   def build_hotels_from_document(document)

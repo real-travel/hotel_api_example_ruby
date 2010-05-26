@@ -98,7 +98,7 @@
       <div class="module">
         <%= image_tag hotel.photo, :width => 150 %>
       </div>
-      <script type="text/javascript" charset="utf-8" src="<%= PlacesController::API_HOST %>/widgets?id=rtpa_link_button&aid=<%= PlacesController::AFFILIATE_ID %>&hotel_id=<%=  hotel.hotel_id %>"></script>
+      <script type="text/javascript" charset="utf-8" src="<%= RT::API.settings['host'] %>/widgets?id=rtpa_link_button&aid=<%= RT::API.settings['aid'] %>&hotel_id=<%=  hotel.hotel_id %>"></script>
       <%#= render :partial=>"check_rates_form", :locals=>{:hotel=>hotel} %>
     </div>
     <div class="span-9 append-1">
@@ -120,5 +120,5 @@
   <%= will_paginate @hotels %>
 </div>
 <div class="advertisement">
-<script type="text/javascript" charset="utf-8" src="<%= PlacesController::API_HOST %>/widgets?id=650x200_shopper_basic_banner&aid=<%= PlacesController::AFFILIATE_ID %>&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
+<script type="text/javascript" charset="utf-8" src="<%= RT::API.settings['host'] %>/widgets?id=650x200_shopper_basic_banner&aid=<%= RT::API.settings['aid'] %>&latitude=<%= @place.latitude %>&longitude=<%= @place.longitude %>"></script>
 </div>

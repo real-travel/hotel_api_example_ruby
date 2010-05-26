@@ -11,10 +11,9 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: rt_api_example_dev
+  database: api_example_development
   username: root
-  password: root
-  socket: /tmp/mysql.sock
+  password: 
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
