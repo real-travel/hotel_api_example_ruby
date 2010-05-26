@@ -1,2 +1,17 @@
-To demo the app, run:
-rake app:import_places
+1) Clone the app:
+git clone git://github.com/real-travel/hotel_api_example_ruby.git
+
+2) Install libxml-ruby, and geo-kit ruby gems
+
+3) Configure your local database:
+ a) Rename the config/database.yml.example to config/database.yml
+ b) Change the database configuration to suit your needs
+ c) Create the databases: rake db:create
+ d) Run migrations: rake db:migrate
+
+4) Load example data:
+  rake app:import_places
+
+5) Setup API Settings
+  a) Rename the config/hotel_api.yml.example to config/hotel_api.yml
+  b) replace the "example_id" with the aid (affiliate_id) that was given to you by Real Travel
