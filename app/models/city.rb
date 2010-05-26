@@ -1,1 +1,0 @@
-class City < Place; end

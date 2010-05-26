@@ -1,1 +1,0 @@
-class County < Place; end

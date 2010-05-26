@@ -29,6 +29,10 @@ namespace :deploy do
     desc "Symlink the hotels api settings"
     run "if [ ! -f #{deploy_to}/shared/hotel_api.yml ]; then cp -pf #{release_path}/config/hotel_api.yml.example #{deploy_to}/shared/hotel_api.yml; fi;"
     run "if [ ! -f #{release_path}/config/hotel_api.yml ]; then ln -sf #{deploy_to}/shared/hotel_api.yml #{release_path}/config/hotel_api.yml; fi;"
+
+    desc "Symlink the mongrel cluster"
+    run "if [ ! -f #{deploy_to}/shared/mongrel_cluster.yml ]; then cp -pf #{release_path}/config/mongrel_cluster.yml.example #{deploy_to}/shared/mongrel_cluster.yml; fi;"
+    run "if [ ! -f #{release_path}/config/mongrel_cluster.yml ]; then ln -sf #{deploy_to}/shared/mongrel_cluster.yml #{release_path}/config/mongrel_cluster.yml; fi;"
   
   end
 
